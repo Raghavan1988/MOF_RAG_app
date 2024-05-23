@@ -111,13 +111,13 @@ def main():
         license = ""
         for tag in tags:
             if "arxiv" in tag.lower():
-                st.write("##### paper:" + tag)
+                st.write("paper:" + tag)
             if "dataset" in tag.lower():
                 dataset = tag
-                st.write("##### " + tag)
+                st.write(tag)
             if "license" in tag.lower():
                 license = tag
-                st.write("#####" + tag)
+                st.write(tag)
 
                         
         # Display the answers with conditional background colors based on the response
