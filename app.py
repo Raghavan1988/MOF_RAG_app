@@ -103,7 +103,23 @@ def main():
         result = get_model_info(hf_url)
         
         st.write(f"## Results: {result['model']}")
-        
+
+        hugging_face_response = get_HF_model_card(hf_url)
+        tags = hugging_face_response["tags"]
+        arxiv = []
+        dataset = ""
+        license = ""
+        for tag in tags:
+            if "arxiv" in tag.lower():
+                st.write("##### paper:" + tag)
+            if "dataset" in tag.lower():
+                dataset = tag
+                st.write("##### " + tag)
+            if "license" in tag.lower():
+                license = tag
+                st.write("#####" + tag)
+
+                        
         # Display the answers with conditional background colors based on the response
         st.write(f"### 1. Training Dataset")
         st.markdown(
