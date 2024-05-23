@@ -8,7 +8,7 @@ def get_HF_model_card(URL):
     st = "https://huggingface.co/allenai/OLMo-7B"
     st = URL.replace("https://huggingface.co/","")
     st = st.strip()
-    response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_TOKEN"]})
+    response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_KEY"]})
     print(response)
     return response
 
