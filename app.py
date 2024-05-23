@@ -7,7 +7,7 @@ import os
 def get_pplxity_response(question, llm, url):
     # Replace placeholder in the question with the actual model name
     question = question.replace("##LLM##", llm)
-    question = question.replace("##URL##", URL)
+    question = question.replace("##URL##", url)
     # API endpoint and payload for the request
     url = "https://api.perplexity.ai/chat/completions"
     payload = {
