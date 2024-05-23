@@ -1,0 +1,25 @@
+{
+  "id": "b9345fee-c1bf-47f8-be4f-7f98c35b6bb8",
+  "model": "llama-3-70b-instruct",
+  "created": 1716446342,
+  "usage": {
+    "prompt_tokens": 119,
+    "completion_tokens": 66,
+    "total_tokens": 185
+  },
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "NO, the datasets used for training Falcon 180B are not released under the Creative Commons license CC-BY-4.0. According to the Hugging Face dataset pointer, Falcon 180B was trained on a combination of datasets, including Wikipedia, BookCorpus, and OpenWebText, which have different licensing terms."
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      }
+    }
+  ]
+}
