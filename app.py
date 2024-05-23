@@ -13,7 +13,7 @@ def get_HF_model_card(URL):
     return responseD
 
 # Function to get response from Perplexity API for a given question and model
-def get_pplxity_response(question, llm, URL, HF_input):
+def get_pplxity_response(question, llm, url, HF_input):
     # Replace placeholder in the question with the actual model name
     question = question.replace("##LLM##", llm)
     question = question.replace("##URL##", url)
@@ -29,7 +29,7 @@ def get_pplxity_response(question, llm, URL, HF_input):
             },
             {
                 "role": "user",
-                "content": question
+                "content": question + " " + HF_input
             }
         ]
     }
