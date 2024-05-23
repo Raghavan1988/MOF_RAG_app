@@ -9,7 +9,8 @@ def get_HF_model_card(URL):
     st = URL.replace("https://huggingface.co/","")
     st = st.strip()
     response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_KEY"]})
-    response = json.loads(response)
+    responseD = json.loads(response.text)
+    return responseD
 
 # Function to get response from Perplexity API for a given question and model
 def get_pplxity_response(question, llm, URL, HF_input):
