@@ -55,10 +55,10 @@ def get_model_info(hf_url):
     hf_url = hf_url.strip()
     
     # Define questions to ask about the model
-    dataset = "Huggingface URL: ##URL## What are the datasets used for training ##LLM## ? Are they released under Creative Commons license CC-BY-4.0 ? Answer can be up to 3 sentences, starting with either YES OR NO. If only some of the datasets are in CC-BY-4.0 license, start with Partially. If the datasets are available, give detailed information. Answer should be STRICTLY about the question on the ##LLM##"
+    dataset = "Huggingface URL: ##URL## What are the datasets used for training ##LLM## ? Are they released under Creative Commons license CC-BY-4.0 ? Answer can be up to 3 sentences, starting with either YES OR NO. If only some of the datasets are in CC-BY-4.0 license, start with Partially. If the datasets are available, give detailed information. Answer should be STRICTLY about the question on the ##LLM## . Look for pointer from Hugging face data. Hugging face: "
     model_weights = "Huggingface URL: ##URL##  Are the model weights of the ##LLM## released in open source? If so, what license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
     inference_code = "Huggingface URL: ##URL##  Are there example inference code shared for the ##LLM##? Is it released under open source license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
-    technical_report = "Huggingface URL: ##URL##  Search for an arxiv link or technical report about ##LLM##? Answer can be up to 3 sentences, include a link to the report or research paper or article, starting with either YES OR NO. The answer should be STRICTLY about the question on the ##LLM## See if hugging face data provides arxiv links Hugging Face Data: "
+    technical_report = "Huggingface URL: ##URL##  Search for an arxiv link or technical report about ##LLM##? Answer can be up to 3 sentences, include a link to the report or research paper or article, starting with either YES OR NO. The answer should be STRICTLY about the question on the ##LLM##. See if Hugging Face data provides arxiv links. Hugging Face Data: "
     
     # Get answers to the questions using the Perplexity API
     answers = {}
