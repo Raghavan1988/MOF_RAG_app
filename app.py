@@ -76,9 +76,6 @@ def get_model_info(hf_url):
         if "dataset" in tag.lower():
             dataset = tag
 
-        if "license" in tag.lower():
-            license = tag
-    
     answers["q1"] = get_pplxity_response(dataset, model, url, dataset)
     answers["q2"] = get_pplxity_response(model_weights, model, url, " ".join(tags))
     answers["q3"] = get_pplxity_response(inference_code, model, url, " ".join(tags))
