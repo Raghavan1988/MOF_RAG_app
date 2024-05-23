@@ -30,7 +30,6 @@ def get_pplxity_response(question, llm):
         "authorization": os.environ['PERPLEXITY_KEY'] 
     }
 
-    ##PERPLEXITY_KEY = "Bearer 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"
     
     # Send the request and parse the response
     response = requests.post(url, json=payload, headers=headers)
