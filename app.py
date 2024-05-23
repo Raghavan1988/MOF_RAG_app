@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+import os
 
 # Function to get response from Perplexity API for a given question and model
 def get_pplxity_response(question, llm):
@@ -26,8 +27,10 @@ def get_pplxity_response(question, llm):
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": "Bearer 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"
+        "authorization": os.environ['PERPLEXITY_KEY'] 
     }
+
+    ##PERPLEXITY_KEY = "Bearer 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"
     
     # Send the request and parse the response
     response = requests.post(url, json=payload, headers=headers)
