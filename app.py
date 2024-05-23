@@ -4,10 +4,10 @@ import json
 import os
 
 # Function to get response from Perplexity API for a given question and model
-def get_pplxity_response(question, llm):
+def get_pplxity_response(question, llm, url):
     # Replace placeholder in the question with the actual model name
     question = question.replace("##LLM##", llm)
-    
+    question = question.replace("##URL##", URL)
     # API endpoint and payload for the request
     url = "https://api.perplexity.ai/chat/completions"
     payload = {
@@ -42,20 +42,21 @@ def get_pplxity_response(question, llm):
 def get_model_info(hf_url):
     # Extract the model name from the URL
     model = hf_url.strip().split('/')[-1]
+    hf_url = hf_url.strip()
     
     # Define questions to ask about the model
-    dataset = "What are the datasets used for training ##LLM## ? Are they released under Creative Commons license CC-BY-4.0 ? Answer can be up to 3 sentences, starting with either YES OR NO. If only some of the datasets are in CC-BY-4.0 license, start with Partially. If the datasets are available, give detailed information. Answer should be STRICTLY about the question on the ##LLM##"
-    model_weights = "Are the model weights of the ##LLM## released in open source? If so, what license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
-    inference_code = "Are there example inference code shared for the ##LLM##? Is it released under open source license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
-    technical_report = "Share the link to the arxiv link or technical report about ##LLM##? Answer can be up to 3 sentences, include a link to the report or research paper or article, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
+    dataset = "Huggingface URL: ##URL## What are the datasets used for training ##LLM## ? Are they released under Creative Commons license CC-BY-4.0 ? Answer can be up to 3 sentences, starting with either YES OR NO. If only some of the datasets are in CC-BY-4.0 license, start with Partially. If the datasets are available, give detailed information. Answer should be STRICTLY about the question on the ##LLM##"
+    model_weights = "Huggingface URL: ##URL##  Are the model weights of the ##LLM## released in open source? If so, what license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
+    inference_code = "Huggingface URL: ##URL##  Are there example inference code shared for the ##LLM##? Is it released under open source license? Answer can be up to 3 sentences, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
+    technical_report = "Huggingface URL: ##URL##  Share the link to the arxiv link or technical report about ##LLM##? Answer can be up to 3 sentences, include a link to the report or research paper or article, starting with either YES OR NO. Answer should be STRICTLY about the question on the ##LLM##"
     
     # Get answers to the questions using the Perplexity API
     answers = {}
     answers["model"]  = model
-    answers["q1"] = get_pplxity_response(dataset, model)
-    answers["q2"] = get_pplxity_response(model_weights, model)
-    answers["q3"] = get_pplxity_response(inference_code, model)
-    answers["q4"] = get_pplxity_response(technical_report, model)
+    answers["q1"] = get_pplxity_response(dataset, model, url)
+    answers["q2"] = get_pplxity_response(model_weights, model, url)
+    answers["q3"] = get_pplxity_response(inference_code, model, url)
+    answers["q4"] = get_pplxity_response(technical_report, model, url)
     
     # Return the gathered information
     return answers
