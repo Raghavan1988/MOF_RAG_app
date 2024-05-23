@@ -9,14 +9,14 @@ def get_HF_model_card(URL):
     st = URL.replace("https://huggingface.co/","")
     st = st.strip()
     response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_KEY"]})
-    print(response)
-    return response
+    response = json.loads(response)
 
 # Function to get response from Perplexity API for a given question and model
-def get_pplxity_response(question, llm, url):
+def get_pplxity_response(question, llm, URL, HF_input):
     # Replace placeholder in the question with the actual model name
     question = question.replace("##LLM##", llm)
     question = question.replace("##URL##", url)
+    question = question + " " + HF_input
     # API endpoint and payload for the request
     url = "https://api.perplexity.ai/chat/completions"
     payload = {
@@ -63,10 +63,25 @@ def get_model_info(hf_url):
     answers = {}
     answers["model"]  = model
     url = hf_url
-    answers["q1"] = get_pplxity_response(dataset, model, url)
-    answers["q2"] = get_pplxity_response(model_weights, model, url)
-    answers["q3"] = get_pplxity_response(inference_code, model, url)
-    answers["q4"] = get_pplxity_response(technical_report, model, url)
+    HF_response = get_HF_model_card(hf_url)
+    tags = HF_response["tags"]
+    arxiv = []
+    dataset = ""
+    license = ""
+    for tag in tags:
+        if "arxiv" in tag:
+            arxiv.append(tag)
+
+        if "dataset" in tag.lower():
+            dataset = tag
+
+        if "license" in tag.lower():
+            license = tag
+    
+    answers["q1"] = get_pplxity_response(dataset, model, url, dataset)
+    answers["q2"] = get_pplxity_response(model_weights, model, url, tags)
+    answers["q3"] = get_pplxity_response(inference_code, model, url, tags)
+    answers["q4"] = get_pplxity_response(technical_report, model, url, " ".join(arxiv))
     
     # Return the gathered information
     return answers
@@ -85,7 +100,7 @@ def main():
     # If form is submitted and URL is provided, get and display the model information
     if submit and hf_url:
         result = get_model_info(hf_url)
-        HF_response = get_HF_model_card(hf_url)
+        
         st.write(f"## Results: {result['model']}")
         
         # Display the answers with conditional background colors based on the response
