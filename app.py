@@ -3,6 +3,15 @@ import requests
 import json
 import os
 
+
+def get_HF_model_card(URL):
+    st = "https://huggingface.co/allenai/OLMo-7B"
+    st = URL.replace("https://huggingface.co/","")
+    st = st.strip()
+    response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_TOKEN"]})
+    print(response)
+    return response
+
 # Function to get response from Perplexity API for a given question and model
 def get_pplxity_response(question, llm, url):
     # Replace placeholder in the question with the actual model name
@@ -76,6 +85,7 @@ def main():
     # If form is submitted and URL is provided, get and display the model information
     if submit and hf_url:
         result = get_model_info(hf_url)
+        HF_response = get_HF_model_card(hf_url)
         st.write(f"## Results: {result['model']}")
         
         # Display the answers with conditional background colors based on the response
