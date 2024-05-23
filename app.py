@@ -104,6 +104,7 @@ def main():
         
         # Disclaimer note about the accuracy of the responses
         st.write("**Note:** This is based on LLM response and hallucinations happen.")
+        st.markdown(f"<font color=red> Hallucinations happen</font>", unsafe_allow_html=True)
 
 # Run the main function when the script is executed
 if __name__ == "__main__":
