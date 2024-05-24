@@ -8,8 +8,12 @@ def get_HF_model_card(URL):
     st = "https://huggingface.co/allenai/OLMo-7B"
     st = URL.replace("https://huggingface.co/","")
     st = st.strip()
-    response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_KEY"]})
-    responseD = json.loads(response.text)
+    responseD = {}
+    try:
+        response = requests.get("https://huggingface.co/api/models/" + st, params={},headers={"Authorization": os.environ["HF_KEY"]})
+        responseD = json.loads(response.text)
+    except:
+        responseD = {}
     return responseD
 
 # Function to get response from Perplexity API for a given question and model
@@ -43,10 +47,14 @@ def get_pplxity_response(question, llm, url, HF_input):
     
     # Send the request and parse the response
     response = requests.post(url, json=payload, headers=headers)
-    responseD = json.loads(response.text)
+    try:
+        
+        responseD = json.loads(response.text)
     
-    # Return the content of the response
-    return responseD["choices"][0]["message"]["content"]
+        # Return the content of the response
+        return responseD["choices"][0]["message"]["content"]
+    except:
+        return ""
 
 # Function to gather model information based on the provided Hugging Face URL
 def get_model_info(hf_url):
