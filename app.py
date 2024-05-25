@@ -54,7 +54,7 @@ def get_pplxity_response(question, llm, url, HF_input):
         # Return the content of the response
         return responseD["choices"][0]["message"]["content"]
     except:
-        return ""
+        return "no response"
 
 # Function to gather model information based on the provided Hugging Face URL
 def get_model_info(hf_url):
