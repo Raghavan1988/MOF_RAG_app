@@ -127,26 +127,32 @@ def main():
                         
         # Display the answers with conditional background colors based on the response
         st.write(f"### 1. Training Dataset")
+        result_cleaned = {} 
+        result_cleaned['q1'] = result['q1'].replace("YES","").replace("NO","").strip()
+        result_cleaned['q2'] = result['q2'].replace("YES","").replace("NO","").strip()
+        result_cleaned['q3'] = result['q3'].replace("YES","").replace("NO","").strip()
+        result_cleaned['q4'] = result['q4'].replace("YES","").replace("NO","").strip()
+
         st.markdown(
-            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q1'].startswith('YES') else 'grey'}; color: {'black' if result['q1'].startswith('YES') else 'white'};'> {result['q1'].replace("YES","").replace("NO", "")} </p>",
+            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q1'].startswith('YES') else 'grey'}; color: {'black' if result['q1'].startswith('YES') else 'white'};'> {result_cleaned['q1']} </p>",
             unsafe_allow_html=True
         )
         
         st.write(f"### 2. Model Weights")
         st.markdown(
-            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q2'].startswith('YES') else 'grey'}; color: {'black' if result['q2'].startswith('YES') else 'white'};'> {result['q2'].replace("YES","").replace("NO", "")} </p>",
+            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q2'].startswith('YES') else 'grey'}; color: {'black' if result['q2'].startswith('YES') else 'white'};'> {result_cleaned['q2']} </p>",
             unsafe_allow_html=True
         )
         
         st.write(f"### 3. Inference Code")
         st.markdown(
-            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q3'].startswith('YES') else 'grey'}; color: {'black' if result['q3'].startswith('YES') else 'white'};'> {result['q3'].replace("YES","").replace("NO", "")} </p>",
+            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q3'].startswith('YES') else 'grey'}; color: {'black' if result['q3'].startswith('YES') else 'white'};'> {result_cleaned['q3']} </p>",
             unsafe_allow_html=True
         )
         
         st.write(f"### 4. Technical Report")
         st.markdown(
-            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q4'].startswith('YES') else 'grey'}; color: {'black' if result['q4'].startswith('YES') else 'white'};'> {result['q4'].replace("YES","").replace("NO", "")} </p>",
+            f"<p style='background-color: {'rgb(168, 230, 168)' if result['q4'].startswith('YES') else 'grey'}; color: {'black' if result['q4'].startswith('YES') else 'white'};'> {result_cleaned['q4']} </p>",
             unsafe_allow_html=True
         )
         
