@@ -5,7 +5,6 @@ import os
 
 
 def get_HF_model_card(URL):
-    st = "https://huggingface.co/allenai/OLMo-7B"
     st = URL.replace("https://huggingface.co/","")
     st = st.strip()
     responseD = {}
